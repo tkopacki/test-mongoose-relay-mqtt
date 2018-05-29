@@ -11,7 +11,6 @@ let testGPIO = (ip, pin, channel, onState) =>
         return gpioGetter(ip, pin, onState)
     })
     .then(response => {
-        console.log("GPIO real state recieved:", response);
         if (!response) {
             throw new Error("Pin wasn't enabled correctly\n");
         }
@@ -24,7 +23,6 @@ let testGPIO = (ip, pin, channel, onState) =>
         return gpioGetter(ip, pin, onState)
     })
     .then(response => {
-        console.log("GPIO real state recieved:", response);
         if (response) {
             throw new Error("Pin wasn't disabled correctly");
         }
