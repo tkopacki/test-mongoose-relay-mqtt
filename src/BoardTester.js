@@ -10,6 +10,7 @@ let testGPIO = (ip, pin, channel, onState) =>
         return gpioGetter(ip, pin, onState)
     })
     .then(response => {
+        console.log(response);
         if (response) {
             return relayOff(ip, channel);
         } else {
