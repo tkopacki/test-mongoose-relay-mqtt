@@ -4,8 +4,7 @@ import {
     relayOff
 } from './Helpers'
 
-let testGPIO = (ip, pin, channel, onState) =>
-    console.log("Testing relay on pin", pin);
+let testGPIO = (ip, pin, channel, onState) => 
     relayOn(ip, channel)
     .then(() => {
         console.log("Relay ON signal sent");
