@@ -5,6 +5,7 @@ let gpioGetter = (ip, pin, onState) =>
         "pin": pin
     })
     .then(response => {
+        console.log(response.data);
         return response.data.value === onState;
     });
 
