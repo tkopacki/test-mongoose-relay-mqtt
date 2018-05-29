@@ -13,7 +13,7 @@ let testGPIO = (ip, pin, channel, onState) =>
         if (response) {
             return relayOff(ip, channel);
         } else {
-            throw new Error("Pin", pin, "wasn't enabled correctly");
+            throw new Error("Pin wasn't enabled correctly\n");
         }
     })
     .then(response => {
@@ -21,7 +21,7 @@ let testGPIO = (ip, pin, channel, onState) =>
     })
     .then(response => {
         if (response) {
-            throw new Error("Pin", pin, "wasn't disabled correctly");
+            throw new Error("Pin wasn't disabled correctly");
         }
     });
 
