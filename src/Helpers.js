@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 
 let gpioGetter = (ip, pin, onState) =>
-    axios.get('http://' + ip + '/rpc/GPIO.Read', {
+    axios.post('http://' + ip + '/rpc/GPIO.Read', {
         "pin": pin
     })
     .then(response => {
