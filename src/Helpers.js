@@ -6,7 +6,7 @@ let gpioGetter = (ip, pin, onState) =>
     })
     .then(response => {
         console.log("Response from GPIO.Read:", response.data);
-        return response.data.value === onState;
+        response.data.value === onState;
     });
 
 let relayOn = (ip, channel) =>
@@ -14,7 +14,7 @@ let relayOn = (ip, channel) =>
         "name": channel
     })
     .then(() => {
-        return new Promise((resolve, reject) => {
+        new Promise((resolve, reject) => {
             setTimeout(function () {
                 console.log("Sleep 3s after ON");
                 resolve();
@@ -26,7 +26,7 @@ let relayOff = (ip, channel) =>
     axios.post('http://' + ip + '/rpc/Relay.off', {
         "name": channel
     }).then(() => {
-        return new Promise((resolve, reject) => {
+        new Promise((resolve, reject) => {
             setTimeout(function () {
                 console.log("Sleep 3s after OFF");
                 resolve();
