@@ -5,20 +5,32 @@ let gpioGetter = (ip, pin, onState) =>
         "pin": pin
     })
     .then(response => {
-        console.log(response.data.value);
-        console.log(onState);
-        console.log(response.data.value === onState);
         return response.data.value === onState;
     });
 
 let relayOn = (ip, channel) =>
     axios.post('http://' + ip + '/rpc/Relay.on', {
         "name": channel
+    })
+    .then(() => {
+        return new Promise((resolve, reject) => {
+            setTimeout(function () {
+                console.log("Sleep 3s after ON");
+                resolve();
+            }, 3000);
+        });
     });
 
 let relayOff = (ip, channel) =>
     axios.post('http://' + ip + '/rpc/Relay.off', {
         "name": channel
+    }).then(() => {
+        return new Promise((resolve, reject) => {
+            setTimeout(function () {
+                console.log("Sleep 3s after OFF");
+                resolve();
+            }, 3000);
+        });
     });
 
 export {
