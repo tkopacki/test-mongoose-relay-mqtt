@@ -6,7 +6,7 @@ import {
 
 let testGPIO = (ip, pin, channel, onState) =>
     relayOn(ip, channel)
-    .then(response => {
+    .then(() => {
         return gpioGetter(ip, pin, onState)
     })
     .then(response => {
@@ -16,7 +16,7 @@ let testGPIO = (ip, pin, channel, onState) =>
             throw new Error("Pin wasn't enabled correctly\n");
         }
     })
-    .then(response => {
+    .then(() => {
         return gpioGetter(ip, pin, onState)
     })
     .then(response => {
