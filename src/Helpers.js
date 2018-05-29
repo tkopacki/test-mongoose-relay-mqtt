@@ -1,15 +1,15 @@
 import * as axios from 'axios';
-import * as winston from 'winston';
+import Logger from 'node-logger-es6';
 
-const logger = winston.createLogger({
-    level: 'info',
-    format: winston.format.json(),
-    transports: [
-        new winston.transports.Console({
-            format: winston.format.simple()
-        })
-    ]
-});
+let logger = Logger.configure(
+    {
+        level: 'debug',
+        rotation: 'd',
+        size: 5,
+        json: true,
+        timestamp: true
+    }
+);
 
 let gpioGetter = (ip, pin, onState) =>
     axios.post('http://' + ip + '/rpc/GPIO.Read', {
