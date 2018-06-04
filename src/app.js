@@ -1,11 +1,24 @@
-import {
-    testGPIO
-} from './BoardTester';
-import MQTTClient from './MQTTClient';
+import * as mqtt from 'mqtt';
+import * as fse from 'fs-extra';
 
-/*testGPIO('192.168.0.17', 5, "light1", 0)
-    .then(() => console.log("Light1 tested"))
-    .catch((error) => console.log("Test failed !"));*/
 
-let mqtt = new MQTTClient("mqtt://aqmqtt.ddns.net:1883", "aquarium", "dupek.12");
-mqtt.subscribe("parents/aquarium/relays/switch1", (message) => {console.log(message)});
+let client = mqtt.connect('mqtt://aqmqtt.ddns.net:1883', {
+    "username": "aquarium",
+    "password": "dupek.12"
+});
+
+let scheduler = {
+    "light1": {"on": "", "off": ""},
+    "light2": {"on": "", "off": ""},
+    "co2": {"on": "", "off": ""},
+    "o2": {"on": "", "off": ""},
+};
+
+client.on('message', function (topic, message) {
+    message = JSON.parse(message);
+    fs.writeJson('/var/log/aquarium/switch.log', message);
+})
+
+client.on('connect', function () {
+    client.subscribe("parents/aquarium/callback");
+})
