@@ -16,7 +16,8 @@ let scheduler = {
 
 client.on('message', function (topic, message) {
     message = JSON.parse(message);
-    fse.writeJson('/var/log/aquarium/switch.log', message, {"flag": "a"});
+    message["ts"] = new Date().toString();
+    fse.writeJson('switch.log', message, {"flag": "a"});
 })
 
 client.on('connect', function () {
